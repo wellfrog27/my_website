@@ -21,7 +21,7 @@ summaryLength = 100
 enableRobotsTXT = true
 # uglyurls = true
 # watch = true
-# enableGitInfo = true
+enableGitInfo = true
 
 [permalinks]
   # blog = "/blog/:year/:month/:filename"
