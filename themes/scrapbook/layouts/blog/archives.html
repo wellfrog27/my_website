@@ -1,0 +1,94 @@
+{{ define "main" }}
+{{ $blogPages := where site.RegularPages "Section" "blog" }}
+
+<div id="content">
+  <div id="content-inner">
+
+    <div id="alpha">
+      <div id="alpha-inner">
+        <h1 id="page-title" class="archive-title">文章存档</h1>
+        <div class="content-nav">
+          <p><a href="#">按日期排列</a></p>
+        </div>
+
+        {{ range $blogPages | first 1 }}
+        <div id="entry-2097" class="entry-asset asset hentry">
+
+          <div class="asset-header">
+            <h2 class="asset-name entry-title"><a href="{{ .Permalink }}" rel="bookmark">{{ .Title }}</a></h2>
+            <p id="asset-tags">
+              分类<span class="delimiter">：</span>
+              <a href="{{ .CurrentSection.Permalink }}" rel="tag">{{ .CurrentSection.Title }}</a>
+            </p>
+          </div>
+          <div class="asset-content entry-content">
+
+            <div class="asset-body">
+              <p>{{ .Description | default .Summary }}</p>
+            </div>
+            <div class="asset-more-link">
+              <p><a href="{{ .Permalink }}" rel="bookmark">继续阅读全文 »</a></p>
+            </div>
+
+          </div>
+
+          <div class="asset-footer">
+            <div class="asset-meta">
+              <p> <span class="byline">
+
+                  <abbr class="published" title="{{ .Date }}">{{ .Date.Format "2006年1月2日 15:04" }}</abbr>
+                </span>
+
+                <span class="separator"></span> <a href=""></a>
+
+
+              </p>
+            </div>
+          </div>
+        </div>
+        {{ end }}
+
+
+        <div class="module-categories module">
+          <h2 class="module-header">最近的20篇文章（共{{ $blogPages | len }}篇）</h2>
+          <div class="module-content">
+            <ul class="module-list">
+
+              {{ range $blogPages.ByDate.Reverse | after 1 | first site.Params.BlogArchivesRecentLimit }}
+              <li class="module-list-item">{{ .Date.Format "2006.01.02" }}：<a
+                  href="{{ .Permalink }}">{{ .Title }}</a><span class="hint"></span>
+              </li>
+              {{ end }}
+              
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="beta">
+      <div id="beta-inner">
+        <div class="module-categories module">
+          <h2 class="module-header">分类</h2>
+          <div class="module-content">
+            <ul class="module-list">
+              {{ with .Site.GetPage "section" "blog" }}
+              {{ range .Sections }}
+              <li class="module-list-item"><a href="{{ .Permalink }}"
+                  title="{{ .Title }}">{{ .Title }}</a>（{{ .Pages | len  }}）</li>
+              {{ end }}
+              {{end}}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+{{ end }}

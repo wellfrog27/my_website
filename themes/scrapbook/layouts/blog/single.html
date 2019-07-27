@@ -1,0 +1,158 @@
+{{ define "main" }}
+
+{{ $currentPage := . }}
+<div id="content">
+    <div id="content-inner">
+        <div id="alpha">
+            <div id="alpha-inner">
+
+                <div id="entry-1983" class="entry-asset asset hentry">
+
+                    <div class="asset-header">
+                        <div class="asset-nav entry-nav">
+
+                            <div class="entry-location">
+                                <ul>
+                                    {{if .NextPage}}
+                                    <li>上一篇：<a href="{{ .NextPage.Permalink }}"
+                                            title="{{.NextPage.Title }}">{{ .NextPage.Title}}</a>
+                                    </li>
+                                    {{end}}
+
+                                    {{if .PrevPage}}
+                                    <li>下一篇：<a href="{{ .PrevPage.Permalink }}"
+                                            title="{{.PrevPage.Title }}">{{ .PrevPage.Title }}</a>
+                                    </li>
+                                    {{end}}
+
+                                </ul>
+                            </div>
+
+
+
+                            <div class="entry-categories">
+                                <p>分类<span class="delimiter">：</span></p>
+                                <ul>
+                                    <li><a href="{{ .CurrentSection.Permalink }}"
+                                            rel="tag">{{ .CurrentSection.Title }}</a></li>
+                                </ul>
+                            </div>
+
+
+
+
+                            <div class="entry-location-mobile" style="float: right;">
+                                <ul>
+                                    {{if .NextPage}}
+                                    <li><a href="{{ .NextPage.Permalink }}" title="{{.NextPage.Title }}">⇐</a></li>
+                                    {{ end }}
+                                    {{ if .PrevPage }}
+                                    <li><a href="{{ .PrevPage.Permalink }}" title="{{.PrevPage.Title }}">⇒</a></li>
+                                    {{ end }}
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <article class="hentry">
+                        <h1 id="page-title" class="asset-name entry-title">{{ .Title }}</h1>
+                        
+                        {{/*  Share Button  */}}
+                        {{ if site.Params.showShareIcon }}
+                        <div id="share_button" class="social-share"
+                            style="float:right;padding-right:2em;padding-top:1em;">
+                            <a class="bshareDiv" href="http://www.bshare.cn/share" style="display: block; text-decoration: none; padding: 0px;
+                margin: 0px; font-size: 12px; height: 21px; width: 51px;">
+                                <div class="bsPromo bsPromo1"></div>
+                                <div class="buzzButton bsStyle10" style="height:21px;color:#333;;background:transparent
+                  url(http://static.bshare.cn/frame/images/button_custom10-zh-Orange.gif)
+                  no-repeat;text-align:center;width:51px;">
+                                </div>
+                                <div style="clear:both;"></div>
+                            </a>
+
+                            <script type="text/javascript" charset="utf-8"
+                                src="http://static.bshare.cn/b/buttonLite.js#uuid=&amp;style=10&amp;bgcolor=#fff&amp;bp=weixin,qqim,qzone,qqmb,sinaminiblog,fanfou,xueqiu,douban,facebook,twitter,gplus,instapaper&amp;ssc=false">
+                            </script>
+
+                            <script type="text/javascript" charset="utf-8">
+                                bShare.addEntry({
+                                    title: document.getElementById("page-title").innerHTML,
+                                    url: window.location.href
+                                });
+                            </script>
+
+                        </div>
+                        {{ end }}
+
+                        <div class="asset-meta">
+                            <p class="vcard author">作者： <a class="fn url" href="/">
+                                    {{ if isset .Params "author" }}
+                                    {{ .Params.author }}
+                                    {{ else }}
+                                    {{ site.Author.name }}
+                                    {{ end }}
+                                </a></p>
+                            <p>日期： <a href="{{ .CurrentSection.Permalink }}"><abbr class="published"
+                                        title={{ .Date }}>{{dateFormat "2006年1月2日" .Date }}</abbr></a>
+                            </p>
+                        </div>
+
+                        <div class="asset-content entry-content" id="main-content">
+                            {{ .Content }}
+                        </div>
+
+                        <div class="asset-footer">
+                            <h3>文档信息</h3>
+                            <ul>
+                                <li>版权声明：自由转载-非商用-非衍生-保持署名（<a
+                                        href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）
+                                </li>
+                                <li>发表日期： <abbr class="published"
+                                        title=".Date">{{ dateFormat "2006年1月2日" .Date }}</abbr></li>
+                            </ul>
+                        </div>
+
+                    </article>
+
+                </div>
+
+                {{ $relatedPages := (where .Site.RegularPages "CurrentSection.Title" .CurrentSection.Title) | first (add site.Params.BlogRelatedLimit 1) | complement (slice $currentPage) | first site.Params.BlogRelatedLimit }}
+                {{ with $relatedPages }}
+                <div id="related_entries">
+
+                    <h2>相关文章</h2>
+                    <ul>
+                        {{ range . }}
+                        <li><strong>{{ .Date.Format "2006.01.02" }}: <a href="{{ .Permalink }}"
+                                    title="{{ .Title }}">{{ .Title }}</a></strong>
+
+                            <div class="entry-body">
+                                {{ .Description | default "暂无描述，请点击阅读全文"}}
+                            </div>
+
+                        </li>
+                        {{ end }}
+                    </ul>
+                </div>
+                {{ end }}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/*  enlarge image  */}}
+{{ if site.Params.enlargeImage }}
+<div id="click-img-container">
+    <img src="" alt="Big Image">
+</div>
+{{ end }}
+
+{{/*  disqus  */}}
+{{ if .Site.DisqusShortname }}
+{{ template "_internal/disqus.html" . }}
+{{ end }}
+
+{{ end }}

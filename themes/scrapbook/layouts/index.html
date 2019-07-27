@@ -1,0 +1,23 @@
+{{ define "main" }}
+
+<div id="content">
+    <div id="content-inner">
+        <div id="alpha">
+            <div id="alpha-inner">
+                <div id="page-alpha" style="margin-bottom:2em;">
+                    {{ range site.Menus.subsites }}
+                    <p>» <a href="{{ .URL }}">{{ .Name }}</a> </p>
+                    {{ end }}
+                </div>
+                <div id="up-arrow"></div>
+                <div id="page-beta"></div>
+            </div>
+        </div>
+        <div id="beta">
+            <div id="beta-inner">
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ end }}

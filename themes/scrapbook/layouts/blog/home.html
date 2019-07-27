@@ -1,0 +1,90 @@
+{{ define "main" }}
+
+{{ $blogPages := where site.RegularPages "Section" "blog" }}
+{{ $blogArchives := site.GetPage "/blog/archives" }}
+
+<div id="content">
+    <div id="content-inner">
+        <div id="alpha">
+            <div id="alpha-inner">
+                
+                {{ range $blogPages.ByDate | last 1 }}
+                <div id="entry-2097" class="entry-asset asset hentry">
+
+                    <div class="asset-header">
+                        <h2 class="asset-name entry-title"><a href="{{ .Permalink }}" rel="bookmark">{{ .Title }}</a>
+                        </h2>
+                        <p id="asset-tags">
+                            分类<span class="delimiter">：</span>
+                            <a href="{{ .CurrentSection.Permalink }}" rel="tag">{{ .CurrentSection.Title }}</a>
+                        </p>
+                    </div>
+
+                    <div class="asset-content entry-content">
+                        <div class="asset-body">
+                            <p>{{ .Description | default .Summary }}</p>
+                        </div>
+                        <div class="asset-more-link">
+                            <p><a href="{{ .Permalink }}" rel="bookmark">继续阅读全文 »</a></p>
+                        </div>
+                    </div>
+
+                    <div class="asset-footer">
+                        <div class="asset-meta">
+                            <p>
+                                <span class="byline">
+                                    <abbr class="published"
+                                        title="{{ .Date }}">{{ .Date.Format "2006年1月2日 15:04" }}</abbr>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                {{ end }}
+
+                <div id="homepage">
+                    <h3>最新文章</h3>
+                    <ul>
+                        {{ range $blogPages.ByDate.Reverse | after 1 | first site.Params.BlogHomeRecentLimit }}
+                        <li class="module-list-item"><span>{{ .Date.Format $.Site.Params.dateFormat }} » </span><a
+                                href="{{ .Permalink }}">{{ .Title }}</a>
+                        </li>
+                        {{ end }}
+                        <li class="module-list-item"><a href="{{ $blogArchives.Permalink }}"><strong>更多文章……</strong></a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="beta">
+            <div id="beta-inner">
+
+                <div class="module-categories module">
+                    <h2 class="module-header">友情链接</h2>
+                    <ul class="module-list">
+                        {{ range .Site.Menus.friends }}
+                        <li class="module-list-item"><a href="{{ .URL }}" target="_blank">{{ .Name }}</a></li>
+                        {{ end }}
+                    </ul>
+                </div>
+
+                <div class="module-categories module">
+                    <h2 class="module-header">关于</h2>
+                    <div class="module-content">
+                        <ul class="module-list">
+                            {{ partial "aboutMe.html" . }}
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+{{ end }}

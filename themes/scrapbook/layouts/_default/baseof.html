@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard">
+
+{{ partial "head.html" . }}
+
+{{ if .IsHome | or (eq .Kind "404") }}
+<body id="classic-website" class="mt-main-index one-column">
+{{ else if .IsPage | and (ne .Params.layout "archives") }}
+<body id="scrapbook" class="mt-entry-archive one-column">
+{{ else }}
+<body id="scrapbook" class="mt-entry-archive two-columns">
+{{ end }}
+    <div id="container">
+        <div id="container-inner">
+            {{- partial "header.html" . -}}
+            {{- block "main" . }}{{- end }}
+            {{- partial "footer.html" . -}}
+        </div>
+    </div>
+
+    {{ if .IsHome | or (eq .Kind "404") }}
+    <script src="{{ "js/change-background-image.js" | relURL }}"></script>
+    {{ end }}
+    
+</body>
+
+</html>

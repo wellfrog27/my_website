@@ -1,0 +1,42 @@
+<head>
+    {{ hugo.Generator }}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{{ "css/theme_scrapbook.css" | relURL }}" />
+    <link rel="start" href="{{ site.BaseURL }}" title="Home" />
+    {{ range .AlternativeOutputFormats -}}
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+    {{ end -}}
+    {{ with site.Params.favicon -}}
+    <link rel='icon' type='image/x-icon' href="{{ . | absURL }}" />
+    {{ end -}}
+{{/*  different  */}}
+{{ if .IsHome | or (eq .Kind "404") }}
+    <title>{{ site.Title }} - {{ site.Params.englishtitle }}</title>
+    <link rel="stylesheet" href="{{ "css/home.css" | relURL }}" />
+
+{{ else if eq .Params.layout "archives" }}
+    <title>{{ site.Params.blogtitle }}  ： 全部文章（按分类查看）</title>
+
+{{ else if eq .Params.layout "home" }}
+    <title>{{ site.Params.blogtitle }}</title>
+
+{{ else if eq .Section "about" }}
+    <title>{{ .Title }} - {{ site.Params.blogtitle }}</title>
+
+{{ else if .IsPage }}
+    <title>{{ .Title }} - {{ site.Params.blogtitle }}</title>
+    <link rel="stylesheet" href="{{ "css/custom.css" | relURL }}" />
+    {{ if site.Params.enlargeImage }}
+    <script src="{{ "js/click_enlarge_image.js" | relURL }}"></script>
+    {{ end }}
+
+{{ else if .IsNode }}
+    <title>分类：{{ .Title }} - {{ site.Params.blogtitle }}</title>
+{{ end }}
+
+{{ if .Site.GoogleAnalytics }}
+{{ template "_internal/google_analytics_async.html" . }}
+{{ end }}
+
+</head>

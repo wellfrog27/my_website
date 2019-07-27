@@ -1,0 +1,98 @@
+baseurl = "https://wellfrog27.github.io"
+title = "阮一峰的个人网站"
+theme = "scrapbook"
+languageCode = "zh-CN"
+defaultContentLanguage = "zh-CN"
+MetaDataFormat = "yaml"
+# Disqus shortname
+disqusShortname = "lin-hao-rong-de-wang-luo-ri-zhi"
+# google analytics tracking id
+googleAnalytics = "UA-123-45"
+# Code Style
+pygmentsCodefences = true
+pygmentsCodefencesGuessSyntax = true
+pygmentsOptions = "linenos=table"
+pygmentsStyle = "perldoc"
+# Copyright notice. This is displayer in the footer.
+copyright = "&copy; 2019"
+# Chinese Summary
+hasCJKLanguage = true
+summaryLength = 100
+enableRobotsTXT = true
+# uglyurls = true
+# watch = true
+# enableGitInfo = true
+
+[permalinks]
+  # blog = "/blog/:year/:month/:filename"
+
+[taxonomies]
+  # series = "series"
+
+[sitemap]
+  changefreq = "daily"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+[frontmatter]
+  date = ["date", "publishDate", "lastmod"]
+  lastmod = [":git", "lastmod", "date", "publishDate"]
+  publishDate = ["publishDate", "date"]
+  expiryDate = ["expiryDate"]
+
+[params]
+  EnglishTitle = "Ruan YiFeng's Personal Website"
+  blogTitle = "阮一峰的网络日志"
+  # Date format
+  dateFormat = "2006年01月02日"
+  favicon = "images/favicon.ico"
+  BlogRelatedLimit = 4
+  BlogHomeRecentLimit = 7
+  BlogArchivesRecentLimit = 20
+  showShareIcon = true
+  enlargeImage = true
+
+# AboutMe
+[author]
+  name = "阮一峰"
+  # Gravatar or Abatar image
+  gravatar = "yifeng.ruan@gmail.com"
+  # avatar = "/path/to/avatar"
+  twitter = "ruanyf"
+  github = "ruanyf"
+  weibo = "ruanyf"
+  email = "yifeng.ruan@gmail.com"
+
+# header 
+[[menu.header]]
+  name = "首页"
+  weight = 1
+  url = "/blog/"
+[[menu.header]]
+  name = "档案"
+  weight = 2
+  url = "/blog/archives/"
+
+# friend's link
+[[menu.friends]]
+  name = "Hugo"
+  url = "https://gohugo.io"
+  weight = 1
+[[menu.friends]]
+  name = "阮一峰的个人网站"
+  url = "http://www.ruanyifeng.com"
+  weight = 2
+
+# subsites
+[[menu.subsites]]
+  name = "网络日志（Blog）"
+  url = "/blog/"
+  weight = 1
+[[menu.subsites]]
+  name = "文集：未来世界的幸存者"
+  url = "/survivor/"
+  weight = 2
+[[menu.subsites]]
+  name = "文集：前方的路"
+  url = "/road/"
+  weight = 3

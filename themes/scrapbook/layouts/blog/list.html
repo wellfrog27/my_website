@@ -1,0 +1,44 @@
+{{ define "main" }}
+<div id="content">
+  <div id="content-inner">
+    <div id="alpha">
+      <div id="alpha-inner">
+        <h1 id="page-title" class="archive-title"><a href="/blog/archives/">分类</a>： {{ .Page.Title }} （共{{ .Pages | len }}文章）
+        </h1>
+        <div class="module-categories module">
+          <div class="module-content">
+            {{ range .Pages.GroupByDate "2006年" "desc"}}
+            <h3 style="font-size:2em;margin-top:1.5em;">{{ .Key }}</h3>
+            <ul class="module-list">
+              {{ range .Pages.ByDate.Reverse }}
+              <li class="module-list-item">
+                <a href="{{ .Permalink }}">{{ .Title }}</a><span class="RankBar"><span
+                    class="hint">（{{ .Date.Format "2006.01.02"}}）</span></span>
+              </li>
+              {{ end }}
+            </ul>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="beta">
+      <div id="beta-inner">
+        <div class="module-categories module">
+          <h2 class="module-header">分类</h2>
+          <div class="module-content">
+            <ul class="module-list">
+              {{ with .Site.GetPage "section" "blog" }}
+              {{ range .Sections }}
+              <li class="module-list-item"><a href="{{ .Permalink }}"
+                  title="{{ .Title }}">{{ .Title }}</a>（{{ .Pages | len  }}）</li>
+              {{ end }}
+              {{end}}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

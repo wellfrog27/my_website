@@ -1,0 +1,26 @@
+{{ $blogPages := where site.RegularPages "Section" "blog" }}
+{{ $about := site.GetPage "/about" }}
+
+{{/*  avatar  */}}
+{{ if site.Author.gravatar }}
+{{- $hash := trim site.Author.gravatar " " | lower | md5 }}
+<p class="module-list-item"><a href="https://www.gravatar.com/avatar/{{ $hash }}.jpg?s=150"
+        onclick="window.open('https://www.gravatar.com/avatar/{{ $hash }}.jpg?s=480','popup','width=480,height=640,scrollbars=no,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); return false"><img
+            src="https://www.gravatar.com/avatar/{{ $hash }}.jpg?s=150" width="106" height="106" alt="个人照片"></a>
+</p>
+{{ else if site.Author.avatar }}
+<p class="module-list-item"><a href="{{ site.Author.avatar }}"
+        onclick="window.open('{{ site.Author.avatar }}','popup','width=480,height=640,scrollbars=no,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); return false"><img
+            src="{{ site.Author.avatar }}" width="106" height="106" alt="个人照片"></a>
+</p>
+{{ end }}
+
+<li class="module-list-item"><a href="{{ $about.Permalink }}">个人简介</a></li>
+{{ with site.Author.email }}
+<li class="module-list-item">Email：<a href="mailto:{{ . }}">{{ . }}</a>
+</li>
+{{ end }}
+<li class="module-list-item">文章：<a href="/blog/archives">{{ $blogPages | len }}</a></li>
+<li class="module-list-item"><a href="https://weibo.com/{{ site.Author.weibo }}" target="_blank">微博</a>，<a
+        href="https://twitter.com/{{ site.Author.twitter }}" target="_blank">推特</a></li>
+<li class="module-list-item"><a href="https://github.com/{{ site.Author.github }}" target="_blank">GitHub</a></li>
