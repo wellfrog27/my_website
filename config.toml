@@ -46,7 +46,7 @@ enableGitInfo = true
   blogTitle = "阮一峰的网络日志"
   # Date format
   dateFormat = "2006年01月02日"
-  favicon = "images/favicon.ico"
+  favicon = "/favicon.ico"
   BlogRelatedLimit = 4
   BlogHomeRecentLimit = 7
   BlogArchivesRecentLimit = 20

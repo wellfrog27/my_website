@@ -8,7 +8,7 @@
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
     {{ end -}}
     {{ with site.Params.favicon -}}
-    <link rel='icon' type='image/x-icon' href="{{ . | absURL }}" />
+    <link rel='icon' type='image/x-icon' href="{{ . }}" />
     {{ end -}}
 {{/*  different  */}}
 {{ if .IsHome | or (eq .Kind "404") }}
