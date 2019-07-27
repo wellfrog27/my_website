@@ -22,6 +22,7 @@ enableRobotsTXT = true
 # uglyurls = true
 # watch = true
 enableGitInfo = true
+publishDir = "docs"
 
 [permalinks]
   # blog = "/blog/:year/:month/:filename"
