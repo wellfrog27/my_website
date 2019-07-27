@@ -151,7 +151,7 @@
 {{ end }}
 
 {{/*  disqus  */}}
-{{ if .Site.DisqusShortname }}
+{{ if site.DisqusShortname | and (not .Params.NotAllowComment) }}
 {{ template "_internal/disqus.html" . }}
 {{ end }}
 

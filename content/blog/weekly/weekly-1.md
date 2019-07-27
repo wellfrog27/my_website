@@ -2,6 +2,7 @@
 title: 科技爱好者周刊：第1期
 date: 2019-07-25
 author: 阮一峰
+NotAllowComment: true
 ---
 # 每周分享第 1 期
 
